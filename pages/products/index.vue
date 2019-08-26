@@ -42,13 +42,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      setProducts: 'products/setProducts'
+      // setProducts: 'products/setProducts'
     }),
     async getProducts ($state) {
       this.fetching = true
       const response = await this.$axios.$get(`/products?page=${this.page}&with=files,categories`)
       this.products = this.products.concat(response.data.docs)
-      this.setProducts(this.products)
+      // this.setProducts(this.products)
       this.hasMore = response.data.hasNextPage
       this.fetching = false
       this.page = response.data.nextPage

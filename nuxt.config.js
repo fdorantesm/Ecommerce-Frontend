@@ -30,7 +30,9 @@ module.exports = {
   plugins: [
     { src: '~/plugins/vue-infinite-scroll.js', ssr: false },
     { src: '~/plugins/vue-infinite-loading.js', ssr: false },
-    { src: '~/plugins/vuex-persist.js', ssr: false }
+    { src: '~/plugins/vuex-persist.js', ssr: false },
+    { src: '~/plugins/geocoder.js', ssr: false },
+    { src: '~/plugins/google-maps.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -38,7 +40,10 @@ module.exports = {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     // '@nuxtjs/eslint-module',
-    'nuxt-vuex-localstorage'
+    'nuxt-vuex-localstorage',
+    ['nuxt-google-maps-module', {
+      key: 'AIzaSyAKCqAqiyop85LNl9qUb6OAT1lJupLEnzo'
+    }]
   ],
   /*
   ** Nuxt.js modules

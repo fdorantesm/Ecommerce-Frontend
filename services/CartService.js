@@ -8,4 +8,7 @@ export default class CartService {
   getCart () {
     return axios.get(`https://localhost:9001/cart?key=${this.key}`)
   }
+  static addToCart (data) {
+    return axios.post(`https://localhost:9001/cart`, data)
+  }
 }

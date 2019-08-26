@@ -1,6 +1,8 @@
 const store = {
-  state: {
-    user: {}
+  state () {
+    return {
+      user: {}
+    }
   },
   mutations: {
     setUser (state, user) {

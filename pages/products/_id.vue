@@ -19,8 +19,7 @@
           </div>
           <div>
             <CartCounter @increase="cartCounterChange" @decrease="cartCounterChange" class="cart-counter mb20 mt20"/>
-            <button class="btn fw">Agregar al carrito</button>
-            {{cartBag}}
+            <button class="btn fw" @click="addToCart">Agregar al carrito</button>
           </div>
         </div>
       </div>
@@ -33,12 +32,14 @@ import CartCounter from '~/components/CartCounter'
 import ProductService from '~/services/ProductService'
 import { mapState, mapActions } from 'vuex'
 import uuid from 'uuid'
+import CartService from '../../services/CartService';
 
 export default {
   components: {
     CartCounter
   },
   mounted () {
+    console.log({id: this.$route.params.id})
     this.getProduct(this.$route.params.id)
   },
   data () {
@@ -46,7 +47,7 @@ export default {
       product: null,
       include: ['categories', 'files'],
       cartBag: {
-        key: uuid.v4(),
+        key: null,
         qty: 1,
         product: null
       }
@@ -67,6 +68,18 @@ export default {
         const response = await ProductService.getProduct(id, this.include)
         this.product = response.data.data
         this.cartBag.product = this.product._id
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async addToCart (e) {
+      try {
+        const response = await CartService.addToCart({
+          key: this.cart.key,
+          product: this.cartBag.product,
+          qty: this.cartBag.qty
+        })
+        this.updateCart(response.data)
       } catch (err) {
         console.log(err)
       }

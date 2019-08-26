@@ -13,7 +13,7 @@
             <nuxt-link class="nav__link" to="/auth">Login</nuxt-link>
           </li>
           <li class="nav__item">
-            <nuxt-link class="nav__link" to="/">Item</nuxt-link>
+            <nuxt-link class="nav__link" to="/cart">Cart</nuxt-link>
           </li>
           <li class="nav__item">
             <nuxt-link class="nav__link" to="/">Item</nuxt-link>
