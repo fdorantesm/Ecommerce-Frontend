@@ -1,0 +1,16 @@
+#header {
+  width: 100%;
+}
+
+.nav {
+  &__list {
+    display: flex;
+  }
+  &__item {
+    margin: 0 1rem;
+    list-style: none;
+  }
+  &__link {
+    color: red;
+  }
+}

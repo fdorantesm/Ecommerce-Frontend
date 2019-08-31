@@ -1,0 +1,51 @@
+.cart-counter {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rebeccapurple;
+  padding: 1px;
+  width: 200px;
+  &__input {
+    text-align: center;
+    color: rebeccapurple;
+    background: #FFF;
+    letter-spacing: 0.25ch;
+    max-width: 50%;
+    font-size: 1rem;
+    border: {
+      color: transparent;
+      style: solid;
+      width: 1.5px;
+    };
+  }
+  &__button {
+    background: #FFF;
+    color: rebeccapurple;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    border: {
+      style: solid;
+      color: transparent;
+    };
+    transition: all 0.25s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    &:hover {
+      color: #FFF;
+      background: darken(rebeccapurple, 5%);
+      transition: all 0.25s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+      border-color: rebeccapurple;
+    }
+    &:active {
+      color: #FFF;
+      background: darken(rebeccapurple, 10%);
+      transition: all 0.0125s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+      border-color: rebeccapurple;
+    }
+    &--increase {
+      border-left: transparent;
+    }
+    &--decrease {
+      border-right: transparent;
+    }
+  }
+}

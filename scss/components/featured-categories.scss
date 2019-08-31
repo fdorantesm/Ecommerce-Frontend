@@ -1,0 +1,29 @@
+.featured-categories {
+  &__item {
+    background: rgb(193, 232, 255);
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__head {
+      font-size: 1.5rem;
+      margin: 0;
+      flex-basis: 100%;
+    }
+    &__title {
+      font-size: 1.5rem;
+    }
+    &__title, &__subtitle {
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0.25ch;
+    }
+    &__subtitle {
+      font-size: 0.75rem;
+    }
+  }
+  &__image {
+    flex-basis: 100%;
+  }
+}

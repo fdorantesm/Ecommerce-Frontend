@@ -1,0 +1,17 @@
+.gmap {
+	position: relative;
+	&__autocomplete {
+    display: block;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    width: 100%;
+    font-size: 1rem;
+		// position: absolute;
+		// z-index: 1;
+		// top: 10px;
+		// left: 190px;
+		// height: 41px;
+		// width: 294px;
+		// padding: 0 0.5rem;
+	}
+}
