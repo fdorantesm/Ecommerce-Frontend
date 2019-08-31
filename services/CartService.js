@@ -6,9 +6,9 @@ export default class CartService {
     this.key = key || uuid.v4()
   }
   getCart () {
-    return axios.get(`https://localhost:9001/cart?key=${this.key}`)
+    return axios.get(`https://api-store.dorant.es/cart?key=${this.key}`)
   }
   static addToCart (data) {
-    return axios.post(`https://localhost:9001/cart`, data)
+    return axios.post(`https://api-store.dorant.es/cart`, data)
   }
 }

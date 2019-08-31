@@ -4,7 +4,7 @@ import axios from 'axios'
 
 if (process.client) {
   const state = JSON.parse(localStorage.getItem('app')) || {}
-  axios.defaults.baseURL = 'https://localhost:9001'
+  axios.defaults.baseURL = 'https://api-store.dorant.es'
   axios.defaults.json = true
   axios.defaults.headers.common['accept-language'] = state.lang || 'es'
 

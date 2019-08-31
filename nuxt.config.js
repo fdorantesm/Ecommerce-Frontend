@@ -58,7 +58,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'https://localhost:9001',
+    baseURL: 'https://store.dorant.es',
     progress: true
   },
   /*

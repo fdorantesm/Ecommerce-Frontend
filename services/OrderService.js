@@ -10,7 +10,7 @@ export default class OrderService {
           authorization: app.auth.user.accessToken
         }
       }
-      return axios.post('https://localhost:9001/orders', data, config)
+      return axios.post('https://api-store.dorant.es/orders', data, config)
     } catch (err) {
       throw err
     }
@@ -22,6 +22,6 @@ export default class OrderService {
         authorization: app.auth.user.accessToken
       }
     }
-    return axios.get(`https://localhost:9001/orders/${id}?with=summary,summary.product,payments,deliveries,customer.profile`, config)
+    return axios.get(`https://api-store.dorant.es/orders/${id}?with=summary,summary.product,payments,deliveries,customer.profile`, config)
   }
 }
