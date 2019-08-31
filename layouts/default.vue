@@ -21,10 +21,8 @@ export default {
     try {
       const app = await LocalStorage.getItem('app', {})
       if (!app.cart) {
-        console.log('1∆')
         await this.loadCart()
       } else {
-        console.log('2∆')
         await this.loadCart(app.cart.key)
       }
     } catch (err) {
@@ -32,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['cart'])
+    ...mapState(['cart', 'products'])
   },
   components: {
     Header,
@@ -46,7 +44,6 @@ export default {
     async loadCart (key) {
       const shoppingCart = new CartService(key)
       const response = await shoppingCart.getCart()
-      console.log(response)
       this.updateCart(response.data)
     }
   }

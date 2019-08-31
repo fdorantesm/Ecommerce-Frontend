@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="product in products" :key="product._id" class="col-md-4">
+      <div v-for="product in products.list" :key="product._id" class="col-md-4">
         <ProductCard :product="product" />
       </div>
     </div>
-    <infinite-loading @infinite="getProducts">
+    <!-- <infinite-loading @infinite="getProducts">
       <div v-if="fetching" slot="spinner">
         Cargando
       </div>
@@ -15,12 +15,12 @@
       <div v-if="products.length === 0 && !fetching" slot="no-results">
         No hay productos :(
       </div>
-    </infinite-loading>
+    </infinite-loading> -->
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import ProductCard from '~/components/ProductCard'
 
 export default {
@@ -33,12 +33,16 @@ export default {
       pages: 1,
       loading: false,
       hasMore: false,
-      products: [],
       fetching: false
     }
   },
   mounted () {
     // this.getProducts()
+  },
+  computed: {
+    ...mapState([
+      'products'
+    ]),
   },
   methods: {
     ...mapActions({
