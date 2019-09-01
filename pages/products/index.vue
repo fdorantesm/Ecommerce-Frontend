@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="product in products.list" :key="product._id" class="col-md-4">
+      <div v-for="product in products" :key="product._id" class="col-md-4">
         <ProductCard :product="product" />
       </div>
     </div>
@@ -22,27 +22,32 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import ProductCard from '~/components/ProductCard'
+import ProductService from '../../services/ProductService';
 
 export default {
   components: {
     ProductCard
   },
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    const data = {}
+    const productsResponse = await ProductService.getProducts();
+    data.products = productsResponse.data.data.docs;
+    return data;
+  },
   data: () => {
-    return {
-      page: 1,
-      pages: 1,
-      loading: false,
-      hasMore: false,
-      fetching: false
-    }
+    // return {
+    //   page: 1,
+    //   pages: 1,
+    //   loading: false,
+    //   hasMore: false,
+    //   fetching: false
+    // }
   },
   mounted () {
     // this.getProducts()
   },
   computed: {
-    ...mapState([
-      'products'
-    ]),
+
   },
   methods: {
     ...mapActions({

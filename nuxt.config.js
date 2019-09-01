@@ -51,14 +51,15 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'https://store.dorant.es',
+    API_HOST: process.env.API_HOST,
     progress: true
   },
   /*
@@ -70,5 +71,11 @@ module.exports = {
     */
     extend (config, ctx) {
     }
+  },
+  /**
+   * Host configuration
+   */
+  server: {
+
   }
 }

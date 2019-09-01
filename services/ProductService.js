@@ -1,10 +1,13 @@
-import axios from 'axios'
-
+import http from '~/libraries/http'
 export default class ProductService {
-  static getProducts () {
-    return axios.get(`https://api-store.dorant.es/products`)
+  static getProducts (page = 1) {
+    return http.get(`/products?page=${page}`)
   }
-  static getProduct (id) {
-    return axios.get(`https://api-store.dorant.es/products/${id}`)
+  static getProduct (id, includes) {
+    const query = {
+      with: includes.toString()
+    }
+    const queryString = Object.keys(query).map(key => key + '=' + query[key]).join('&')
+    return http.get(`/products/${id}?${queryString}`)
   }
 }

@@ -38,39 +38,42 @@ export default {
   components: {
     CartCounter
   },
-  mounted () {
-    console.log({id: this.$route.params.id})
-    this.getProduct(this.$route.params.id)
-  },
-  data () {
-    return {
-      product: null,
-      include: ['categories', 'files'],
-      cartBag: {
-        key: null,
-        qty: 1,
-        product: null
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    try {
+      const data = {
+        product: null,
+        cartBag: {
+          key: null,
+          qty: 1,
+          product: null
+        }
       }
+      const response = await ProductService.getProduct(route.params.id, ['categories','files'])
+      data.product = response.data.data
+      data.cartBag.product = data.product._id
+      return data
+    } catch (err) {
+      console.log(err)
     }
   },
   computed: {
     ...mapState(['auth', 'cart'])
   },
   methods: {
-    ...mapActions({
-      'updateCart': 'cart/updateCart'
-    }),
-    cartCounterChange(value) {
-      this.cartBag.qty = value
-    },
     async getProduct (id) {
       try {
-        const response = await ProductService.getProduct(id, this.include)
+        const response = await ProductService.getProduct(id, ['categories','files'])
         this.product = response.data.data
         this.cartBag.product = this.product._id
       } catch (err) {
         console.log(err)
       }
+    },
+    ...mapActions({
+      'updateCart': 'cart/updateCart'
+    }),
+    cartCounterChange(value) {
+      this.cartBag.qty = value
     },
     async addToCart (e) {
       try {
