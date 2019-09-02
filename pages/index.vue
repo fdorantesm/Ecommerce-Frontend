@@ -11,7 +11,7 @@
           <div class="col-md-4 col-md-pull-8">
             <h2>Productos de madera de alta calidad</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem expedita, enim impedit temporibus cumque aliquam sequi in commodi aliquid, maiores distinctio ab, fuga officia! Doloremque ea facilis perspiciatis minima vel?</p>
-            <nuxt-link class="btn" to="/">Productos</nuxt-link>
+            <nuxt-link to="/products" class="btn btn-outline-primary btn-sm">Products</nuxt-link>
           </div>
         </div>
       </div>

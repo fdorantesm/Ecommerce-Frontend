@@ -40,6 +40,7 @@ export default {
       try {
         const response = await AuthService.login(this.form.email, this.form.password)
         this.setUser(response.data)
+        this.$router.push('/cart')
         this.error = null
       } catch (err) {
         this.error = err.response.data.message

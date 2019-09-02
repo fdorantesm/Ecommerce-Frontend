@@ -14,28 +14,33 @@
     "nuxt:start": "nuxt start"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.8",
-    "@fortawesome/free-brands-svg-icons": "^5.5.0",
-    "@fortawesome/free-regular-svg-icons": "^5.5.0",
-    "@fortawesome/free-solid-svg-icons": "^5.5.0",
-    "@fortawesome/vue-fontawesome": "^0.1.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-regular-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/vue-fontawesome": "^0.1.7",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@pderas/vue2-geocoder": "^1.1.0",
     "asynkstorage": "^1.0.8",
+    "bootstrap-vue": "^2.0.0-rc.28",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "gosp.css": "^1.0.20",
+    "normalize-scss": "^7.0.1",
     "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
     "nuxt-google-maps-module": "^1.6.0",
     "nuxt-vuex-localstorage": "^1.2.6",
+    "query-string": "^6.8.3",
     "uuid": "^3.3.3",
     "vue-credit-card-field": "^0.3.14",
     "vue-infinite-loading": "^2.4.4",
     "vue-infinite-scroll": "^2.0.2",
     "vue-tabs-component": "^1.5.0",
     "vue2-google-maps": "^0.10.7",
+    "vuejs-paginate": "^2.1.0",
     "vuex-persist": "^2.0.1"
   },
   "devDependencies": {
@@ -50,6 +55,7 @@
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "sass-loader": "^7.3.1",
-    "vue-jest": "^4.0.0-0"
+    "vue-jest": "^4.0.0-0",
+    "webpack": "^4.39.3"
   }
 }

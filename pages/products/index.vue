@@ -5,67 +5,62 @@
         <ProductCard :product="product" />
       </div>
     </div>
-    <!-- <infinite-loading @infinite="getProducts">
-      <div v-if="fetching" slot="spinner">
-        Cargando
-      </div>
-      <div v-if="!hasMore" slot="no-more">
-        No hay más productos
-      </div>
-      <div v-if="products.length === 0 && !fetching" slot="no-results">
-        No hay productos :(
-      </div>
-    </infinite-loading> -->
+    <b-row>
+      <b-pagination v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
+    </b-row>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 import ProductCard from '~/components/ProductCard'
-import ProductService from '../../services/ProductService';
+import ProductService from '~/services/ProductService'
+import queryString from 'query-string'
 
 export default {
   components: {
-    ProductCard
+    ProductCard,
   },
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     const data = {}
-    const productsResponse = await ProductService.getProducts();
+    const productsResponse = await ProductService.getProducts(query.page || 1, ['categories', 'files']);
+    data.pages = 20;
     data.products = productsResponse.data.data.docs;
+    data.page = productsResponse.data.data.page;
+    data.perPage = productsResponse.data.data.limit;
+    data.rows = productsResponse.data.data.totalDocs
     return data;
   },
   data: () => {
-    // return {
-    //   page: 1,
-    //   pages: 1,
-    //   loading: false,
-    //   hasMore: false,
-    //   fetching: false
-    // }
-  },
-  mounted () {
-    // this.getProducts()
-  },
-  computed: {
-
+    return {
+      page: 1,
+      pages: 1,
+      loading: false,
+      hasMore: false,
+      fetching: false,
+      products: []
+    }
   },
   methods: {
-    ...mapActions({
-      // setProducts: 'products/setProducts'
-    }),
-    async getProducts ($state) {
-      this.fetching = true
-      const response = await this.$axios.$get(`/products?page=${this.page}&with=files,categories`)
-      this.products = this.products.concat(response.data.docs)
-      // this.setProducts(this.products)
-      this.hasMore = response.data.hasNextPage
-      this.fetching = false
-      this.page = response.data.nextPage
-      if (this.hasMore && !this.fetching) {
-        $state.loaded()
-      } else if (!this.hasMore) {
-        $state.complete()
-      }
+    functionName() {
+
+    },
+    async getProducts (page) {
+      const productsResponse = await ProductService.getProducts(this.$route.query.page || 1, ['categories', 'files']);
+      this.pages = 20;
+      this.products = productsResponse.data.data.docs;
+      this.page = productsResponse.data.data.page;
+      this.perPage = productsResponse.data.data.limit;
+      this.rows = productsResponse.data.data.totalDocs
+    }
+  },
+  watch: {
+    page() {
+      // this.$router.history.current.query.page = this.page;
+      // console.log(this.$router.history.current.query)
+      // const query = queryString.stringify(this.$router.history.current.query)
+      this.$router.push({ query: this.$router.history.current.query})
+      this.getProducts(this.page)
     }
   }
 }

@@ -1,4 +1,6 @@
-@import "../node_modules/gosp.css/src/gosp";
+@import "./modules/gosp";
+@import "./modules/bootstrap";
+@import "./modules/material-colors";
 
 @import "./app";
 @import "./resets/resets";

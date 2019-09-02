@@ -23,6 +23,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+
   ],
   /*
   ** Plugins to load before mounting the App
@@ -39,11 +40,7 @@ module.exports = {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    // '@nuxtjs/eslint-module',
-    'nuxt-vuex-localstorage',
-    ['nuxt-google-maps-module', {
-      key: 'AIzaSyAKCqAqiyop85LNl9qUb6OAT1lJupLEnzo'
-    }]
+    // '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
@@ -52,7 +49,21 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'bootstrap-vue/nuxt',
+    'nuxt-vuex-localstorage',
+    ['nuxt-fontawesome', {
+      component: 'fa',
+      imports: [
+        {
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['faUser', 'faShoppingCart']
+        }
+      ],
+    }],
+    ['nuxt-google-maps-module', {
+      key: 'AIzaSyAKCqAqiyop85LNl9qUb6OAT1lJupLEnzo'
+    }]
   ],
   /*
   ** Axios module configuration
