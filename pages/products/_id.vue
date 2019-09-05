@@ -2,7 +2,9 @@
   <div v-if="product">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 p20"></div>
+        <div class="col-md-8 p20">
+          <img :src="product.files[0].path" width="100%"/>
+        </div>
         <div class="col-md-4 p20">
           <div>{{product.name}}</div>
           <div>{{product.price}}</div>
