@@ -1,0 +1,14 @@
+.product-card {
+  border: 1px solid #eee;
+  background: #FFF;
+  margin-bottom: 2rem;
+  &__image {
+    //
+  }
+  &__body {
+    padding: 1rem;
+  }
+  &__description {
+    color: #444;
+  }
+}

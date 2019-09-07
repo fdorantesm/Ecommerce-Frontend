@@ -4,6 +4,9 @@
 
 @import "./app";
 @import "./resets/resets";
+
+@import "./theme/resets";
+
 @import "./components/header";
 @import "./components/buttons";
 @import "./components/alerts";
@@ -14,3 +17,4 @@
 @import "./components/featured-products";
 @import "./components/featured-categories";
 @import "./components/cart-counter";
+@import "./components/product-card";

@@ -1,13 +1,18 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="product in products" :key="product._id" class="col-md-4">
-        <ProductCard :product="product" />
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <b-row>
+          <div v-for="product in products" :key="product._id" class="col-md-4">
+            <ProductCard :product="product" />
+          </div>
+        </b-row>
+        <b-row class="mt25 mb25">
+          <b-pagination v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
+        </b-row>
       </div>
     </div>
-    <b-row>
-      <b-pagination v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
-    </b-row>
   </div>
 </template>
 
@@ -59,8 +64,9 @@ export default {
       // this.$router.history.current.query.page = this.page;
       // console.log(this.$router.history.current.query)
       // const query = queryString.stringify(this.$router.history.current.query)
-      this.$router.push({ query: this.$router.history.current.query})
-      this.getProducts(this.page)
+      console.log({page: this.page || 1, p: this.page})
+      this.$router.push({page: this.page || 1})
+      this.getProducts(this.page || 1)
     }
   }
 }
