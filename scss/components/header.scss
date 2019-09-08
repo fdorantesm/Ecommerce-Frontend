@@ -1,17 +1,15 @@
 #header {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  .nav {
+    &-link {
+      color: #444!important;
+    }
+  }
 }
 
-.nav {
-  &__list {
-    display: flex;
-  }
-  &__item {
-    margin: 0 1rem;
-    list-style: none;
-  }
-  &__link {
-    color: red;
+.header {
+  &__logo {
+    height: 48px;
   }
 }

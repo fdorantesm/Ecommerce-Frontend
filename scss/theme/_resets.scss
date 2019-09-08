@@ -1,3 +1,19 @@
 a {
   color: rebeccapurple;
 }
+
+.page {
+  &-item {
+    .page-link {
+      color: rebeccapurple;
+      &:focus {
+        box-shadow: unset;
+      }
+    }
+    &.active .page-link {
+      background: rebeccapurple;
+      border-color: rebeccapurple;
+      color: #FFF;
+    }
+  }
+}

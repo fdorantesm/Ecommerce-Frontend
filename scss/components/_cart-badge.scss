@@ -1,0 +1,19 @@
+.shopping-icon {
+  position: relative;
+  &__badge {
+    position: absolute;
+    top: -0.5rem;
+    background: rgba(255, 0, 0, 0.95);
+    border-radius: 50%;
+    font-size: 0.5rem;
+    padding: 3px;
+    left: 0.5rem;
+    color: white;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}

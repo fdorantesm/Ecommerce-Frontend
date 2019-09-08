@@ -1,0 +1,23 @@
+.error {
+  &-404 {
+    &__text {
+      min-height: inherit;
+      background: url('/img/404-background.jpg') no-repeat center center / cover;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: inherit;
+      font-size: 40vw;
+      flex-direction: column;
+    }
+    &__code {
+      font-weight: bold;
+      font-size: 20vw;
+    }
+    &__message {
+      font-size: 4vw;
+    }
+  }
+}

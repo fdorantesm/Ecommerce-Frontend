@@ -1,16 +1,25 @@
 @import "./modules/gosp";
+@import "./helpers/gosp";
+
 @import "./modules/bootstrap";
 @import "./modules/material-colors";
 
 @import "./app";
 @import "./resets/resets";
+@import "./resets/bootstrap";
 
 @import "./theme/resets";
 
 @import "./components/header";
+@import "./components/external";
+@import "./components/errors";
+@import "./components/auth";
+@import "./components/product";
+@import "./components/text";
 @import "./components/buttons";
 @import "./components/alerts";
 @import "./components/tabs";
+@import "./components/cart-badge";
 @import "./components/divider";
 @import "./components/gmap";
 @import "./components/form";

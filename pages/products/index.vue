@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-9">
+      <b-col md="3"></b-col>
+      <b-col md="9">
         <b-row>
-          <div v-for="product in products" :key="product._id" class="col-md-4">
+          <b-col v-for="product in products" :key="product._id" lg="4" md="6" sm="6" xs="6">
             <ProductCard :product="product" />
-          </div>
+          </b-col>
         </b-row>
         <b-row class="mt25 mb25">
           <b-pagination @change="changePage" v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
         </b-row>
-      </div>
+      </b-col>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ import ProductService from '~/services/ProductService'
 import queryString from 'query-string'
 
 export default {
+  scrollToTop: true,
   components: {
     ProductCard,
   },
@@ -61,6 +62,7 @@ export default {
     async changePage(page) {
       this.$router.push({ query: {...this.$router.history.current.query, page}})
       await this.getProducts(page)
+      window.scrollTo(0, 0)
     }
   }
 }

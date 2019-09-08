@@ -1,0 +1,17 @@
+.auth {
+  &__message {
+    background: rebeccapurple url('/img/auth/shutterstock_641814016-1200x675.jpg') no-repeat center center / cover;
+  }
+  &__login {
+    max-width: 320px;
+    margin: auto;
+    display: block;
+  }
+}
+
+.login {
+  &__input {
+    border: 1px solid #444!important;
+    padding: 0 1rem!important;
+  }
+}

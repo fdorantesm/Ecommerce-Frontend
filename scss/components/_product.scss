@@ -1,0 +1,13 @@
+.product {
+  &__description {
+    font-weight: lighter;
+    color: #666;
+  }
+  &__images {
+    //
+  }
+  &__image {
+    border: 1px solid #ccc;
+    margin: 1px;
+  }
+}

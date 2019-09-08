@@ -1,16 +1,26 @@
 <template>
-  <div class="container">
-    <div v-if="error">{{error}}</div>
-    <form @submit.prevent="login" v-if="!auth.user._id">
-      <input v-model="form.email" required type="email" placeholder="Correo electrónico">
-      <input v-model="form.password" required type="password" placeholder="Contraseña">
-      <button type="submit">Iniciar sesión</button>
-    </form>
-    <div v-else>
-      Hola, {{auth.user.profile.firstName}}
-      <a @click.prevent="logout" href="#">Salir</a>
-    </div>
-  </div>
+    <b-row class="aic mhin">
+      <b-col sm="6" class="auth__message mhin hidden-xs">
+
+      </b-col>
+      <b-col sm="6" xs="12">
+        <div class="p25">
+          <div v-if="error">{{error}}</div>
+          <b-form class="auth__login" @submit.prevent="login" v-if="!auth.user._id">
+            <b-form-group center>
+              <b-img center src="/img/logo.png" alt="Logo" width="200"/>
+            </b-form-group>
+            <b-form-group>
+              <b-form-input class="login__input" v-model="form.email" required type="email" placeholder="Correo electrónico" />
+            </b-form-group>
+            <b-form-group>
+              <b-form-input class="login__input" v-model="form.password" required type="password" placeholder="Contraseña" />
+            </b-form-group>
+            <b-btn black variant="primary" type="submit">Iniciar sesión</b-btn>
+          </b-form>
+        </div>
+      </b-col>
+    </b-row>
 </template>
 
 <script>
@@ -19,8 +29,11 @@ import { mapActions, mapState } from 'vuex'
 import AuthService from '../services/AuthService'
 
 export default {
-  mounted () {
-
+  layout: 'external',
+  updated () {
+    if (this.auth.user._id) {
+      this.$router.push('/')
+    }
   },
   data () {
     return {

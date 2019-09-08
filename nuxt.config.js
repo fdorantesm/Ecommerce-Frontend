@@ -1,3 +1,4 @@
+import autoprefixer from 'autoprefixer'
 
 module.exports = {
   mode: 'universal',
@@ -5,7 +6,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: process.env.APP_NAME || '',
+    title: process.env.APP_NAME,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -80,6 +81,9 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    postcss: [
+      autoprefixer()
+    ],
     extend (config, ctx) {
     }
   },

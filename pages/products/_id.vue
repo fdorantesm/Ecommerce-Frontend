@@ -2,28 +2,46 @@
   <div v-if="product">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 p20">
-          <img :src="product.files[0].path" width="100%"/>
-        </div>
-        <div class="col-md-4 p20">
-          <div>{{product.name}}</div>
-          <div>{{product.price}}</div>
-          <ul class="list-reset">
-            <li v-for="category in product.categories" :key="category._id">
-              {{category.name}}
-            </li>
-          </ul>
-          <div>
-            Available <small>{{product.stock || 0}}</small>
+        <b-col md="8">
+          <div class="p20">
+            <b-row class="product__image--main">
+              <img :src="mainImage" width="100%"/>
+            </b-row>
+            <b-row class="list-reset list-inline product__images">
+              <b-col md="auto" v-for="image in product.files" :key="image._id" class="product__image">
+                <b-img :src="image.path" width="100" @click="setMainImage" class="curp"/>
+              </b-col>
+            </b-row>
           </div>
-          <div>
-            <p>{{product.description}}</p>
+        </b-col>
+        <b-col md="4">
+          <div class="p20">
+            <h2>{{product.name}}</h2>
+            <div>${{Number(product.price).toFixed(2)}}</div>
+            <ul class="list-reset">
+              <div class="text-label">
+                Categoría
+              </div>
+              <li v-for="category in product.categories" :key="category._id">
+                {{category.name}}
+              </li>
+            </ul>
+            <div class="mt20">
+              <div class="text-label">Descripción</div>
+              <div class="product__description">
+                {{product.description || 'Lorem ipsum dolor sit amet conseqtur molom gastrim conspectrum sat.'}}
+              </div>
+            </div>
+            <b-row>
+              <CartCounter @increase="cartCounterChange" @decrease="cartCounterChange" class="cart-counter mb20 mt20"/>
+            </b-row>
+            <b-row>
+              <b-button size="xs" variant="outline-success" @click="addToCart">
+                <fa icon="shopping-cart"/> Agregar
+              </b-button>
+            </b-row>
           </div>
-          <div>
-            <CartCounter @increase="cartCounterChange" @decrease="cartCounterChange" class="cart-counter mb20 mt20"/>
-            <button class="btn fw" @click="addToCart">Agregar al carrito</button>
-          </div>
-        </div>
+        </b-col>
       </div>
     </div>
   </div>
@@ -44,6 +62,7 @@ export default {
     try {
       const data = {
         product: null,
+        mainImage: null,
         cartBag: {
           key: null,
           qty: 1,
@@ -52,10 +71,11 @@ export default {
       }
       const response = await ProductService.getProduct(route.params.id, ['categories','files'])
       data.product = response.data.data
+      data.mainImage = data.product.files[0].path
       data.cartBag.product = data.product._id
       return data
     } catch (err) {
-      console.log(err)
+      error({ statusCode: err.response.data.statusCode, message: err.response.data.message })
     }
   },
   computed: {
@@ -88,6 +108,9 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    setMainImage(e) {
+      this.mainImage = e.target.src
     }
   }
 }
