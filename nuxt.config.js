@@ -1,4 +1,4 @@
-import autoprefixer from 'autoprefixer'
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
   mode: 'universal',
