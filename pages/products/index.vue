@@ -9,7 +9,7 @@
           </div>
         </b-row>
         <b-row class="mt25 mb25">
-          <b-pagination v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
+          <b-pagination @change="changePage" v-model="page" :total-rows="rows" :per-page="perPage" aria-controls="my-table"></b-pagination>
         </b-row>
       </div>
     </div>
@@ -51,22 +51,16 @@ export default {
 
     },
     async getProducts (page) {
-      const productsResponse = await ProductService.getProducts(this.$route.query.page || 1, ['categories', 'files']);
+      const productsResponse = await ProductService.getProducts(page, ['categories', 'files']);
       this.pages = 20;
       this.products = productsResponse.data.data.docs;
       this.page = productsResponse.data.data.page;
       this.perPage = productsResponse.data.data.limit;
       this.rows = productsResponse.data.data.totalDocs
-    }
-  },
-  watch: {
-    page() {
-      // this.$router.history.current.query.page = this.page;
-      // console.log(this.$router.history.current.query)
-      // const query = queryString.stringify(this.$router.history.current.query)
-      console.log({page: this.page || 1, p: this.page})
-      this.$router.push({page: this.page || 1})
-      this.getProducts(this.page || 1)
+    },
+    async changePage(page) {
+      this.$router.push({ query: {...this.$router.history.current.query, page}})
+      await this.getProducts(page)
     }
   }
 }
