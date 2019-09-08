@@ -6,4 +6,11 @@ body {
     #__nuxt, #__layout, #app {
       min-height: 100vh;
     }
+    #app {
+      display: flex;
+      flex-direction: column;
+      > main {
+        flex-grow: 1
+      }
+    }
 }
