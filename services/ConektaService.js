@@ -1,6 +1,6 @@
 if (process.client) {
   if (window.Conekta) {
-    window.Conekta.setPublicKey('key_AVyNyZZdY5AsiEEvhpm5crA')
+    window.Conekta.setPublicKey(process.env.CONEKTA_PUBLIC)
   }
 }
 

@@ -37,13 +37,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import {faUser} from '@fortawesome/free-solid-svg-icons'
 export default {
   data(){
     return {
-      icon: {
-        faUser
-      }
+
     }
   },
   computed: {
