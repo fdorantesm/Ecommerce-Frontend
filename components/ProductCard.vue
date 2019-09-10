@@ -2,7 +2,7 @@
     <div class="product-card m10">
       <div class="product-card__image">
         <nuxt-link :to="{name: 'products-id', params: { id: product._id }}">
-          <img :src="product.files[0].path" class="featured-products__image" :alt="product.name">
+          <img v-lazy="product.files[0].path" class="featured-products__image" :alt="product.name">
         </nuxt-link>
       </div>
       <div class="product-card__body p10">

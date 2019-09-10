@@ -5,11 +5,11 @@
         <b-col md="8">
           <div class="p20">
             <b-row class="product__image--main">
-              <img :src="mainImage" width="100%"/>
+              <img v-lazy="mainImage" width="100%"/>
             </b-row>
             <b-row class="list-reset list-inline product__images">
               <b-col md="auto" v-for="image in product.files" :key="image._id" class="product__image">
-                <b-img :src="image.path" width="100" @click="setMainImage" class="curp"/>
+                <b-img :src="image.path" v-lazy="image.path" width="100" @click="setMainImage" class="curp"/>
               </b-col>
             </b-row>
           </div>
@@ -110,7 +110,7 @@ export default {
       }
     },
     setMainImage(e) {
-      this.mainImage = e.target.src
+      this.mainImage = e.target.dataset.src
     }
   }
 }

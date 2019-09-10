@@ -34,7 +34,8 @@ module.exports = {
     { src: '~/plugins/vue-infinite-loading.js', ssr: false },
     { src: '~/plugins/vuex-persist.js', ssr: false },
     { src: '~/plugins/geocoder.js', ssr: false },
-    { src: '~/plugins/google-maps.js', ssr: false }
+    { src: '~/plugins/google-maps.js', ssr: false },
+    { src: '~/plugins/lazyload.client.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -84,7 +85,11 @@ module.exports = {
     postcss: [
       autoprefixer()
     ],
-    extend (config, ctx) {
+    extend (config, { isDev, isClient, loaders: { vue } }) {
+      // if (isClient) {
+      //   vue.transformAssetUrls.img = ['data-src', 'src']
+      //   vue.transformAssetUrls.source = ['data-srcset', 'srcset']
+      // }
     }
   },
   /**
