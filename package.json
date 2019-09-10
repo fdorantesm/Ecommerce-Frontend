@@ -35,6 +35,7 @@
     "nuxt-vuex-localstorage": "^1.2.6",
     "query-string": "^6.8.3",
     "uuid": "^3.3.3",
+    "vue-content-placeholders": "^0.2.1",
     "vue-credit-card-field": "^0.3.14",
     "vue-infinite-loading": "^2.4.4",
     "vue-infinite-scroll": "^2.0.2",

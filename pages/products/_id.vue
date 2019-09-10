@@ -1,48 +1,85 @@
 <template>
-  <div v-if="product">
-    <div class="container">
-      <div class="row">
-        <b-col md="8">
-          <div class="p20">
-            <b-row class="product__image--main">
-              <img v-lazy="mainImage" width="100%"/>
-            </b-row>
-            <b-row class="list-reset list-inline product__images">
-              <b-col md="auto" v-for="image in product.files" :key="image._id" class="product__image">
-                <b-img :src="image.path" v-lazy="image.path" width="100" @click="setMainImage" class="curp"/>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-        <b-col md="4">
-          <div class="p20">
-            <h2>{{product.name}}</h2>
-            <div>${{Number(product.price).toFixed(2)}}</div>
-            <ul class="list-reset">
-              <div class="text-label">
-                Categoría
+  <div>
+    <div v-if="product">
+      <div class="container">
+        <b-row>
+          <ul class="list-reset list-inline breadcrumbs">
+          <li><nuxt-link to="/products">Products</nuxt-link></li>
+          <li><nuxt-link :to="{name: 'products', query: {category: product.categories[0].name}}">{{product.categories[0].name}}</nuxt-link></li>
+          <li>{{product.name}}</li>
+        </ul>
+        </b-row>
+        <div class="row">
+          <b-col md="5" sm="12" class="col-md-push-7">
+            <div class="p20">
+              <h2>{{product.name}}</h2>
+              <ul class="list-reset">
+                <li v-for="category in product.categories" :key="category._id">
+                  <b-badge variant="primary">{{category.name}}</b-badge>
+                </li>
+              </ul>
+              <div class="mt20 mb20">
+                <div>${{Number(product.price).toFixed(2)}} MXN</div>
               </div>
-              <li v-for="category in product.categories" :key="category._id">
-                {{category.name}}
-              </li>
-            </ul>
-            <div class="mt20">
-              <div class="text-label">Descripción</div>
-              <div class="product__description">
-                {{product.description || 'Lorem ipsum dolor sit amet conseqtur molom gastrim conspectrum sat.'}}
+              <div class="mt20">
+                <div class="product__description">
+                  {{product.description || 'Lorem ipsum dolor sit amet conseqtur molom gastrim conspectrum sat.'}}
+                </div>
               </div>
+              <b-row class="aic">
+                <b-col class="align-items-center d-flex">
+                  <CartCounter @increase="cartCounterChange" @decrease="cartCounterChange" class="cart-counter mb20 mt20 p5"/>
+                  <b-button class="m5" size="xs" variant="outline-success" @click="addToCart">
+                    <fa icon="cart-plus"/>
+                  </b-button>
+                </b-col>
+              </b-row>
+              <b-row>
+
+              </b-row>
             </div>
-            <b-row>
-              <CartCounter @increase="cartCounterChange" @decrease="cartCounterChange" class="cart-counter mb20 mt20"/>
-            </b-row>
-            <b-row>
-              <b-button size="xs" variant="outline-success" @click="addToCart">
-                <fa icon="shopping-cart"/> Agregar
-              </b-button>
-            </b-row>
-          </div>
-        </b-col>
+          </b-col>
+          <b-col md="7" sm="12" class="col-md-pull-5">
+            <div class="p20">
+              <b-row class="product__image--main">
+                <img v-lazy="mainImage" width="100%"/>
+              </b-row>
+              <b-row class="list-reset list-inline product__images">
+                <b-col md="auto" v-for="image in product.files" :key="image._id" class="product__image">
+                  <b-img :src="image.path" v-lazy="image.path" width="100" @click="setMainImage" class="curp"/>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </div>
       </div>
+    </div>
+    <div v-else>
+      <b-container>
+        <b-row>
+          <b-col class="p20" md="8">
+            <content-placeholders>
+              <b-row>
+                <b-col class="p10">
+                  <content-placeholders-img :lines="4" />
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col class="p10"><content-placeholders-img /></b-col>
+                <b-col class="p10"><content-placeholders-img /></b-col>
+                <b-col class="p10"><content-placeholders-img /></b-col>
+              </b-row>
+            </content-placeholders>
+          </b-col>
+          <b-col class="p20" md="4">
+            <content-placeholders>
+              <content-placeholders-text :lines="1" />
+              <content-placeholders-text :lines="1" />
+              <content-placeholders-text :lines="1" />
+            </content-placeholders>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
@@ -105,6 +142,7 @@ export default {
           qty: this.cartBag.qty
         })
         this.updateCart(response.data)
+        this.$router.push('/cart')
       } catch (err) {
         console.log(err)
       }

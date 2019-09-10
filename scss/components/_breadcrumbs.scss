@@ -1,0 +1,6 @@
+.breadcrumbs {
+  > li:not(:first-child):before {
+    content: '/';
+    margin-right: 0.5ch;
+  }
+}
