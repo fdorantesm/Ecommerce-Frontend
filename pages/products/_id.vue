@@ -4,10 +4,10 @@
       <div class="container">
         <b-row>
           <ul class="list-reset list-inline breadcrumbs">
-          <li><nuxt-link to="/products">Products</nuxt-link></li>
-          <li><nuxt-link :to="{name: 'products', query: {category: product.categories[0].name}}">{{product.categories[0].name}}</nuxt-link></li>
-          <li>{{product.name}}</li>
-        </ul>
+            <li><nuxt-link to="/products">Products</nuxt-link></li>
+            <li><nuxt-link :to="{name: 'products', query: {category: product.categories[0].name}}">{{product.categories[0].name}}</nuxt-link></li>
+            <li>{{product.name}}</li>
+          </ul>
         </b-row>
         <div class="row">
           <b-col md="5" sm="12" class="col-md-push-7">

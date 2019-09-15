@@ -22,6 +22,6 @@ export default class OrderService {
         authorization: app.auth.user.accessToken
       }
     }
-    return axios.get(`${process.env.API_HOST}/orders/${id}?with=summary,summary.product,payments,deliveries,customer.profile`, config)
+    return axios.get(`${process.env.API_HOST}/orders/${id}?with=summary,summary.product.files,summary.product.categories,payments,deliveries,customer.profile`, config)
   }
 }

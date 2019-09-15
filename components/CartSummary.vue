@@ -1,27 +1,22 @@
 <template>
-  <b-container>
+  <div>
     <b-row v-if="cart.products.length > 0">
       <b-col>
-        <table class="table-collapsed table-responsive w-100">
-            <thead>
-              <!-- <tr>
-                <th></th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Importe</th>
-                <th></th>
-              </tr> -->
-            </thead>
+        <table class="cart-summary__table table-collapsed w-100">
             <tbody>
               <tr v-for="product in cart.products" :key="product._id">
-                <th>
-                  <b-img :src="product.files[0].path" v-lazy="product.files[0].path" width="100%"/>
-                </th>
-                <td>{{product.name}}</td>
-                <td>{{product.qty}}</td>
-                <td>{{Number(product.price).toFixed(2)}}</td>
-                <td>{{Number(product.price * product.qty).toFixed(2)}}</td>
+                <td>
+                  <div class="cart__product__image pr">
+                    <!-- <b-img :src="product.files[0].path" v-lazy="product.files[0].path" width="100%"/> -->
+                    <Picture :src="product.files[0].path" />
+                    <b-badge variant="primary" class="cart__product__badge">{{product.qty}}</b-badge>
+                  </div>
+                </td>
+                <td>
+                  <div>{{product.name}}</div>
+                  <div><small>{{product.categories[0].name}}</small></div>
+                </td>
+                <td>$ {{Number(product.price * product.qty).toFixed(2)}} MXN</td>
                 <td v-if="removeProducts"><b-button variant="outline-danger" size="sm" @click="deleteProductFromCart(product.id)"><fa icon="times"/></b-button></td>
               </tr>
             </tbody>
@@ -50,14 +45,18 @@
         </div>
       </b-col>
     </b-row>
-  </b-container>
+  </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
 import CartService from '~/services/CartService'
+import Picture from '~/components/Picture'
 
 export default {
+  components: {
+    Picture,
+  },
   props: ['cart', 'removeProducts'],
   methods: {
     ...mapActions({

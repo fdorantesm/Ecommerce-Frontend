@@ -11,5 +11,22 @@
 .header {
   &__logo {
     height: 48px;
+    &--minimal {
+     height: 32px;
+    }
+  }
+
+  &--minimal {
+    .navbar {
+      padding: 0;
+      &-brand {
+        align-items: center;
+        display: flex;
+        padding: {
+          top: 0.25rem;
+          bottom: 0.25rem;
+        }
+      }
+    }
   }
 }

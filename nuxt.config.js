@@ -36,7 +36,8 @@ module.exports = {
     { src: '~/plugins/geocoder.js', ssr: false },
     { src: '~/plugins/google-maps.js', ssr: false },
     { src: '~/plugins/lazyload.client.js', ssr: false },
-    { src: '~/plugins/placeholder.client.js', ssr: false }
+    { src: '~/plugins/placeholder.client.js', ssr: false },
+    { src: '~/plugins/modal.client.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -60,7 +61,7 @@ module.exports = {
       imports: [
         {
           set: '@fortawesome/free-solid-svg-icons',
-          icons: ['faUser', 'faShoppingCart', 'faTimes', 'faCartPlus']
+          icons: ['faUser', 'faShoppingCart', 'faTimes', 'faCartPlus', 'faHome']
         }
       ],
     }],

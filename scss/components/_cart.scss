@@ -1,0 +1,45 @@
+.cart {
+  &__product {
+    &__image {
+      position: relative;
+      width: 4.6rem;
+      height: 4.6rem;
+      border: 1px solid aliceblue;
+    }
+    &__badge {
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(50%, -50%);
+    }
+  }
+  &-summary {
+    &__table {
+      display: table;
+      width: 100%;
+      tr {
+        td {
+          padding-top: unset;
+        }
+        &:not(:last-child) {
+          td {
+            padding-bottom: 1rem!important;
+          }
+        }
+        td:first-of-type {
+          padding: {
+            left: 0!important;
+            right: 0!important;
+          };
+        }
+        td:not(:first-of-type) {
+          // transform: translateY(-0.5rem);
+          padding: {
+            left: 0.5rem!important;
+            right: 0.5rem!important;
+          };
+        }
+      }
+    }
+  }
+}

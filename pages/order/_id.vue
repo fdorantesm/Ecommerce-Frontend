@@ -2,44 +2,36 @@
   <div v-if="order._id">
     <div class="container">
       <div class="row jcc">
-        <div class="col-md-6">
-          <div class="row fdc pt20 pb20">
-            <div>Autorización: {{order.payments[0].gatewayChargeId}}</div>
-            <div>Status: {{order.payments[0].status}}</div>
-          </div>
-          <table class="table-collapsed">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Importe</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in order.summary" :key="item._id">
-                <td>{{item.qty}}</td>
-                <td>{{item.product.name}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.price * item.qty}}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th colspan="3">Subtotal</th>
-                <th>{{order.total}}</th>
-              </tr>
-              <tr v-for="item in order.deliveries" :key="item._id">
-                <td colspan="3">Envío</td>
-                <td>{{item.amount}}</td>
-              </tr>
-              <tr>
-                <td colspan="3">Total</td>
-                <td>{{order.payments[0].amount}}</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+        <div class="col-md-5">
+            <b-badge pill :variant="isPending ? 'warning' : 'success'" class="mt20 mb-20">
+              {{isPending ? 'Pendiente' : 'Pagada'}}
+            </b-badge>
+            <b-badge pill variant="info" class="mt20 mb-20">
+              {{method}}
+            </b-badge>
+            <OrderSummary :summary="order.summary" class="pt20 pb20"/>
+            <table v-if="order.payments.length > 1" class="table-bordered table-collapsed w-100">
+              <tbody>
+                <tr v-for="(payment, index) in order.payments" :key="payment._id">
+                  <td>{{index+1}}</td>
+                  <td>$ {{payment.amount}} {{payment.currency}}</td>
+                  <td>{{payment.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td>Envío</td>
+                  <td>$ {{order.deliveries[0].amount}} MXN</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>$ {{order.payments[0].amount}} MXN</td>
+                </tr>
+              </tbody>
+            </table>
+            <b-button variant="outline-primary" @click.prevent="downloadOrderReceipt">Descargar</b-button>
         </div>
       </div>
     </div>
@@ -47,16 +39,44 @@
 </template>
 
 <script>
-import OrderService from '~/services/OrderService';
+import OrderService from '~/services/OrderService'
+import capitalize from 'lodash/capitalize'
+import OrderSummary from '~/components/OrderSummary'
+import {mapState} from 'vuex'
+
 export default {
+  components: {
+    OrderSummary
+  },
   data () {
     return {
-      order: {}
+      order: {},
+      isPending: false,
+      method: null,
+      api: process.env.API_HOST
     }
   },
   async mounted() {
     const order = await OrderService.getOrder(this.$route.params.id)
     this.order = order.data.data
+    const pendings = this.order.payments.map(payment => {
+      payment.status === 'pending_payment'
+    })
+    this.isPending = pendings.length > 0
+    switch (this.order.payments[0].method) {
+      case 'oxxo': this.method = 'OXXO'; break;
+      case 'spei': this.method = 'SPEI'; break;
+      case 'card': this.method = 'Tarjeta'; break;
+    }
+  },
+  computed: {
+    ...mapState(['auth'])
+  },
+  methods: {
+    capitalize,
+    downloadOrderReceipt() {
+      window.open(`${process.env.API_HOST}/orders/${this.order._id}/receipt?access_token=${this.auth.user.accessToken.replace('Bearer ', '')}`);
+    }
   }
 }
 </script>
