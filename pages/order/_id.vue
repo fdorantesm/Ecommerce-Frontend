@@ -40,7 +40,6 @@
 
 <script>
 import OrderService from '~/services/OrderService'
-import capitalize from 'lodash/capitalize'
 import OrderSummary from '~/components/OrderSummary'
 import {mapState} from 'vuex'
 
@@ -73,9 +72,8 @@ export default {
     ...mapState(['auth'])
   },
   methods: {
-    capitalize,
     downloadOrderReceipt() {
-      window.open(`${process.env.API_HOST}/orders/${this.order._id}/receipt?access_token=${this.auth.user.accessToken.replace('Bearer ', '')}`);
+      window.open(`${process.env.SERVICES_API}/orders/${this.order._id}/receipt?access_token=${this.auth.user.accessToken.replace('Bearer ', '')}`);
     }
   }
 }
